@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/assets/index.css">
+    <title>Document</title>
+    <nav>
+        <ul>
+            <li id="home" class="selected" onclick="nav('home')">Home</li>
+            <li id="projects" onclick="nav('projects')">Projects</li>
+            <li id="skills" onclick="nav('skills')">Skills</li>
+            <li id="contact" onclick="nav('contact')">Contact</li>
+        </ul>
+    </nav>
+</head>
+<body>
+
+<!-- Hero Section -->
+
+    <div class="hero">
+        <div class="info">
+            <h1>Hi There, I'm <h1>Floriaan Gaweseb</h1></h1>
+            <p>A fullstack <span class="highlight">web developer and designer</span> based in Otjiwarongo Namibia, <span class="highlight">commited to helping small businesses</span> expand their reach and anhance their online presence through the web</p>
+            <div class="infoBtns">
+                <button class="cvBtn">Download CV</button><button class="toProjects" onclick="nav('projects')">Projects</button>
+            </div>
+        </div>
+        <div class="proImgContainer">
+            <div>
+                <img src="src/assets/SVG/20240812_141933 1.png" alt="">
+            </div>
+        </div>
+    </div>
+
+<!-- Projects Section -->
+
+    <div class="projects">
+        <p>Check out some of the projects I've created</p>
+        <div class="projectsContent">
+            <div class="projectsContainer">
+                <button class="prev" onclick="prevSlide()"></button>
+                <div class="container">
+                    <img src="" alt="" id="project">
+                    <img src="" alt="" id="project">
+                </div>
+                <button class="next" onclick="nextSlide()"></button>
+
+                <div class="persContainer" id="hide">
+                    <p class="pers">Weather app <span class="persSpan">made using html,css and js and OpenWeather api</span></p>
+                    <p class="pers">Rock paper scissors</p>
+                    <p class="pers">Stopwatch</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="projectsType">
+                    <ul>
+                        <li id="client">Client Projects</li>
+                        <li id="personal">Personal projects</li>
+                    </ul>
+                </div>
+                <div class="projectsInfo">
+                    <div class="pInfo">
+                        <h3 id="projectTitle"></h3>
+                        <p id="projectDesc"></p>
+                    </div>
+                    <div class="testimonialInfo" id="hide">
+                        <div class="picDiv"><img src="" alt="" class="clientPic"></div>
+                        <p class="clientFeedback"></p>
+                    </div>
+                    <button id="infoTypeBtn"></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<!-- Skills section -->
+
+    <div class="skills">
+        <div class="skillIcons">
+            <img src="src/assets/SVG/icons8-html.svg" alt="" id="techIcon" onclick="changeTechStyle('html')">
+            <img src="src/assets/SVG/icons8-css3.svg" alt="" id="techIcon" onclick="changeTechStyle('css')">
+            <img src="src/assets/SVG/icons8-javascript.svg" alt="" id="techIcon" onclick="changeTechStyle('js')">
+            <img src="src/assets/SVG/icons8-vue-js.svg" alt="" id="techIcon" onclick="changeTechStyle('vue')">
+            <img src="src/assets/SVG/new-php-logo.svg" alt="php" id="techIcon" onclick="changeTechStyle('php')">
+            <img src="src/assets/SVG/icons8-sql-60.png" alt="" id="techIcon" onclick="changeTechStyle('sql')">
+            <img src="src/assets/SVG/image 8.svg" id="techIcon" onclick="changeTechStyle('tlw')">
+        </div>
+        <div class="skillInfo">
+            <h3 class="skillTitle"></h3>
+            <p class="skillDesc"></p>
+            <div class="exp">
+                <p>Personal experience with technology:</p>
+                <div class="expMeterContainer"><div class="expMeter"></div></div><span class="expPercent"></span>
+            </div>
+        </div>
+    </div>
+
+<!-- Footer section -->
+
+    <footer class="footer">
+        
+        <div class="contactInfo">
+            <h2>Lets have a chat about your next online endeavour @</h2>
+            <div class="info">
+                <div class="infoContainer">
+                    <div><i class="fa-solid fa-envelope"></i></div><p>gfloriaan616@gmail.com</p>
+                </div>
+                <div class="infoContainer">
+                    <div><i class="fa-solid fa-phone"></i></div><p>081 737 6386</p>
+                </div>
+                <div class="infoContainer">
+                    <!-- <div><i class="fa-brands fa-github"></i></div> --> <p>Check out my github repo here <a href="https://github.com/dashboard">freezeflow</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="emailDiv">
+            <form id="contactForm" action="http://localhost:8000" method="post" >
+                <input type="text" id="name" name="name" placeholder="Name">
+                <input type="email" id="email" name="email" placeholder="Email">
+                <textarea id="body" name="body" placeholder="Email body"></textarea>
+                <button type="submit">Send Email</button>
+            </form>
+        </div>
+    </footer>
+</body>
+</html>
+
+<script src="src/js/index.js">
+    
+</script>
+<script src="https://kit.fontawesome.com/af7b4a9a53.js" crossorigin="anonymous"></script>

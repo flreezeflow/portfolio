@@ -1,0 +1,678 @@
+*{
+    font-family: sans-serif;
+}
+
+html{
+    background-color: #111111;
+    overflow-x: hidden;
+}
+
+nav{
+    backdrop-filter: blur(5px);
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: fixed;
+    z-index: 99999;
+}
+
+nav > ul{
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    padding-right: 2rem;
+    list-style: none;
+    color: #ffff;
+    font-size: 20px;
+}
+
+nav > ul li{
+    cursor: pointer;
+}
+
+nav ul .selected{
+    animation: select 1s linear 0s forwards;
+}
+
+@keyframes select {
+    to{
+        color: #3A80A1;
+        list-style: disc;
+    }
+}
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
+body .hero, .projects{
+    /* background-color: #181818;*/
+    width: 100%;
+    height: 100vh;
+}
+
+/* Hero section */
+.hero{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+    color: white;
+}
+
+.hero .info{
+    margin-left: 10px;
+}
+
+.hero .info .highlight{
+    color: #3A80A1;
+    text-decoration: underline;
+}
+
+.hero .info h1{
+    margin: 0;
+    font-size: 3rem;
+}
+
+.hero .info p{
+    font-size: 1.5rem;
+    width: 65%;
+}
+
+.hero .infoBtns{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.hero .infoBtns button{
+    width: 20%;
+    height: 30px;
+    cursor: pointer;
+}
+
+.hero .infoBtns .cvBtn{
+    border: 2px solid #3A80A1;
+    border-radius: 5px;
+    color: white;
+    background-color: #181818;
+}
+
+.hero .infoBtns .cvBtn:hover{
+    border: 2px solid #3a80a19d;
+}
+
+.hero .infoBtns .toProjects:hover{
+    background-color: #3a80a19d;
+}
+
+.hero .infoBtns .toProjects{
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #3A80A1;
+}
+
+.hero .proImgContainer{
+    background-color: #181818;
+    padding: 20px;
+    border: 5px solid;
+    border-image: linear-gradient(45deg, #3A80A1, #11111100, #11111100, #3A80A1) 1;
+    box-shadow: 5px 5px 10px black;
+}
+
+/* Projects section */
+
+.projects{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white; 
+}
+
+.projects > p{
+    font-size: 24px;
+}
+
+.projects .projectsContent{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10vw;
+}
+
+.projects .projectsContent .projectsContainer{
+    /* border: 1px solid #ffff; */
+    height: 80vh;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.projectsContainer .next{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: 0;
+    background-color: #3A80A1;
+    transform: rotate(90deg);
+    clip-path: polygon(50% 0, 100% 80%, 0 80%);
+    cursor: pointer;
+}
+
+.projectsContainer .prev{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: 0;
+    background-color: #3A80A1;
+    transform: rotate(-90deg);
+    clip-path: polygon(50% 0, 100% 80%, 0 80%);
+    cursor: pointer;
+}
+
+.projectsContainer .container{
+    border: 3px solid #3A80A1;
+    background-color: #181818;
+    border-radius: 10px;
+    height: 80%;
+    transition: width 1s;
+}
+
+.projectsContainer .persContainer{
+    margin-bottom: 10%;
+    font-size: 2rem;
+}
+
+.projectsContainer .persContainer > p:hover{
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.507);
+    transition: all 1s ease-in-out;
+}
+
+.projectsContainer .persContainer > p{
+    cursor: pointer;
+}
+
+.projectsContainer .persContainer .persSpan{
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.377);
+}
+
+.projectsContainer .persContainer > p#selected{
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.507);
+}
+
+.projectsContainer .container #project{
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    display: none;
+    animation: pop-out 1s linear 0.5s forwards;
+}
+
+.projectsContainer .container #project[class="displayProject"]{
+    display: block;
+}
+
+@keyframes pop-out {
+    to{
+        transform: translateX(8px) translateY(-8px);
+    }
+}
+
+.projects .projectsContent .info{
+    width: 30%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20vh;
+}
+
+.projects .projectsContent .info .projectsType > ul{
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+    list-style: none;
+    font-size: 16px;
+}
+
+.projectsType > ul li{
+    cursor: pointer;
+}
+
+.projectsType ul li.selectedType{
+    color: #3A80A1;
+    text-decoration: underline;
+}
+
+.projectsInfo >p{
+    opacity: 50%;
+}
+
+.projectsInfo .testimonialInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5%;
+    margin-bottom: 20px; 
+}
+
+.projectsInfo .testimonialInfo .picDiv{
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    border-radius: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projectsInfo .testimonialInfo .picDiv > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
+
+.projectsInfo > button{
+    border: 2px solid #3A80A1;
+    border-radius: 5px;
+    color: white;
+    background-color: #181818;
+    cursor: pointer;
+}
+
+#hide{
+    display: none;
+}
+
+#show{
+    display: block;
+}
+
+/* Skills section */
+
+.skills{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10vh;
+    height: 65vh;
+}
+
+.skills .skillIcons img{
+    width: 70px;
+    margin: 15px;
+    filter: saturate(0);
+}
+
+.skills .skillIcons img[alt='php']{
+    margin-bottom: 25px;
+}
+
+.skills .skillIcons img[alt='php']:hover{
+    filter: saturate(1);
+    width: 100px;
+    transition:all 0.5s;
+}
+
+.skills .skillIcons img:hover{
+    filter: saturate(1);
+    width: 90px;
+    transition:all 0.5s;
+}
+
+.skills .skillIcons .selected{
+    filter: saturate(1);
+    width: 90px;
+}
+
+.skills .skillIcons .selected[alt='php']{
+    filter: saturate(1);
+    width: 100px;
+}
+
+.skills .skillInfo{
+    width: 95%;
+    color: white;
+}
+
+.skills .skillInfo .exp{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.skills .skillInfo .skillDesc{
+    width: 35%;
+}
+
+.exp p{
+    font-weight: bold;
+    margin: 0 5px 0 0;
+}
+
+.exp .expMeterContainer{
+    width: 350px;
+    height: 15px;
+    background-color: #181818;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.expMeterContainer .expMeter{
+    border: 2px solid;
+    margin: 6px 0 5px 5px;
+    transition: all 1.5s;
+}
+
+/* Footer section */
+
+.footer{
+    margin: 0;
+    background-color: #181818;
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+    height: 55vh;
+}
+
+.emailDiv{
+    width: 50%;
+}
+
+.emailDiv form{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5%;
+    height: 100%;
+}
+
+.emailDiv form input{
+    background-color: #111111;
+    border: none;
+    height: 40px;
+    width: 50%;
+    border-radius: 5px;
+    padding-left: 10px;
+    color: white;
+}
+
+.emailDiv form textarea{
+    background-color: #111111;
+    border: none;
+    height: 70px;
+    width: 49%;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+}
+
+.emailDiv form button{
+    background-color: #111111;
+    border: none;
+    height: 30px;
+    width: 30%;
+    border-radius: 5px;
+    margin-right: 22.5%;
+    color: white;
+    outline: none;
+}
+
+.contactInfo{
+    color: white;
+    margin-top: 2%;
+    margin-left: 10px;
+}
+
+.contactInfo .info .infoContainer{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.infoContainer div{
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    background-color: #101630;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 10px black;
+}
+
+@media screen and (max-width:374px){
+    body nav > ul{
+        gap: 2rem;
+    }
+
+    .hero .info{
+        margin: 0;
+    }
+
+    body .skills .skillInfo .skillDesc{
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .exp .expMeterContainer{
+        width: 300px;
+    }
+}
+
+@media screen and (max-width:767px) {
+    body .projects, .skills{
+        height: unset;
+        width: 100%;
+    }
+
+    nav{
+        justify-content: center;
+        
+    }
+
+    nav > ul{
+        padding: 0;
+        font-size: 14px;
+        gap: 2.5rem;
+    }
+
+    /* Hero section */
+    .hero{
+        flex-direction: column-reverse;
+    }
+
+    .hero .info h1{
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .hero .info p{
+        font-size: 16px;
+        text-align: center;
+        width: 100vw;
+    }
+
+    .hero .infoBtns{
+        justify-content: center;
+    }
+
+    .hero .infoBtns button{
+        width: 30%;
+        height: 25px;
+    }
+
+    .hero .proImgContainer img{
+        width: 60vw;
+    }
+
+    /* Projects section */
+    .projects{
+        justify-content: center;
+    }
+
+    .projects > p{
+        margin: 5px 0;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .projectsContainer .persContainer{
+        margin-bottom: 0%;
+        font-size: 1.5rem;
+    }
+
+    .projectsContainer .persContainer > p{
+        text-align: center;
+    }
+    
+    .projectsContainer .persContainer > p:hover{
+        font-size: 1.7rem;
+    }
+
+    .projects .projectsContent .info .projectsType > ul{
+        justify-content: center;
+        padding: 0;
+    }
+
+    .projects .projectsContent{
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .projects .projectsContent .projectsContainer{
+        width: 100%;
+        height: 60vh;
+        gap: 15px;
+    }
+
+    .projectsContainer .next{
+        width: 30px;
+        height: 30px;
+    }
+
+    .projectsContainer .prev{
+        width: 30px;
+        height: 30px;
+    }
+
+    .projects .projectsContent .info{
+        width: 100%;
+        height: unset;
+        text-align: center;
+        gap: 10px;
+        margin-bottom: 10vh;
+    }
+
+    .projectsInfo .testimonialInfo{
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Skills */
+    .skills{
+        gap: 10px;
+        margin-bottom: 20vh;
+    }
+
+    .skills .skillIcons{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .skills .skillIcons img{
+        width: 50px;
+    }
+
+    .skills .skillIcons .selected{
+        width: 60px;
+    }
+
+    .skills .skillIcons .selected[alt='php']{
+        width: 60px;
+    }
+
+    .skills .skillIcons img:hover{
+        width: 60px;
+    }
+
+    .skills .skillIcons img[alt="php"]:hover{
+        width: 60px;
+    }
+
+    .skills .skillInfo{
+        width: 100%;
+    }
+
+    .skills .skillInfo h3{
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .skills .skillInfo .skillDesc{
+        margin-left: 5px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .skills .skillInfo .exp{
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    .exp p{
+        font-size: 14px;
+    }
+
+    /* Footer section */
+    .footer{
+        flex-direction: column;
+        height: unset;
+    }
+
+    .emailDiv{
+        width: 100%;
+    }
+
+    .emailDiv form{
+        gap: 10px;
+        margin-bottom: 50px;
+    }
+
+    .emailDiv form input{
+        width: 70%;
+        height: 30px;
+    }
+
+    .emailDiv form textarea{
+        width: 68%;
+    }
+
+    .emailDiv form button{
+        margin-right: 43%;
+    }
+
+    .infoContainer div{
+        width: 40px;
+        height: 40px;
+    }
+
+    .contactInfo h2{
+        font-size: 1.5rem;
+    }
+}
+
