@@ -63,7 +63,7 @@ class sendEmail extends retreiveData{
     
     private function formatDataAsString(): string {
         return sprintf(
-            "Name: %s\nMobile Number: %s\nbody: %s",
+            "Name: %s\nEmail: %s\nbody: %s",
             $this->name,
             $this->email,
             $this->body,

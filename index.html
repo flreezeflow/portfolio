@@ -111,18 +111,25 @@
                     <div><i class="fa-solid fa-phone"></i></div><p>081 737 6386</p>
                 </div>
                 <div class="infoContainer">
-                    <!-- <div><i class="fa-brands fa-github"></i></div> --> <p>Check out my github repo here <a href="https://github.com/dashboard">freezeflow</a></p>
+                    <div><i class="fa-brands fa-github"></i></div><a href="https://github.com/freezeflow?tab=repositories">Check out my github repo </a>
                 </div>
             </div>
         </div>
 
         <div class="emailDiv">
-            <form id="contactForm" action="http://localhost:8000" method="post" >
+            <form class="contactForm" onsubmit="event.preventDefault()">
                 <input type="text" id="name" name="name" placeholder="Name">
-                <input type="email" id="email" name="email" placeholder="Email">
+                <input type="text" id="email" name="email" placeholder="Email">
+                <p style="color: red; font-size: 0.8rem; margin: 0; display: none;" id="emailError">Invalid Email</p>
                 <textarea id="body" name="body" placeholder="Email body"></textarea>
-                <button type="submit">Send Email</button>
+                <button type="submit" onclick="sendEmail()">Send Email</button>
             </form>
+            <div class="loader" id="hide"></div>
+            <div class="Msg" id="hide">
+                <p class="successMsg" id="hide"><span>😁</span>Thank you for sending your regards, I will message you as soon as possible</p>
+                <span class="failEmoji" id="hide">😓</span>
+                <p class="failMsg" id="hide">Something has gone wrong. You can use my contact details to send a message directly, <span class="retryBtn" onclick="retryEmail()">or you could press here to retry</span></p>
+            </div>
         </div>
     </footer>
 </body>

@@ -237,6 +237,7 @@ body .hero, .projects{
 }
 
 .projects .projectsContent .info .projectsType > ul{
+    padding: 0;
     display: flex;
     flex-direction: row;
     gap: 10%;
@@ -383,6 +384,7 @@ body .hero, .projects{
     flex-direction: row;
     gap: 10%;
     height: 55vh;
+    width: 100%;
 }
 
 .emailDiv{
@@ -406,6 +408,7 @@ body .hero, .projects{
     border-radius: 5px;
     padding-left: 10px;
     color: white;
+    outline: none;
 }
 
 .emailDiv form textarea{
@@ -416,6 +419,7 @@ body .hero, .projects{
     border-radius: 5px;
     padding: 10px;
     color: white;
+    outline: none;
 }
 
 .emailDiv form button{
@@ -427,6 +431,7 @@ body .hero, .projects{
     margin-right: 22.5%;
     color: white;
     outline: none;
+    cursor: pointer;
 }
 
 .contactInfo{
@@ -451,6 +456,72 @@ body .hero, .projects{
     justify-content: center;
     align-items: center;
     box-shadow: 5px 5px 10px black;
+}
+
+.infoContainer a{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.emailDiv form .contactError{
+    border: 1px solid red;
+}
+
+.loader{
+    border: 16px solid #111111;
+    border-top: 16px solid #3A80A1;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 20% 40%;
+    animation: spinner 2s linear infinite;
+}
+
+.emailDiv .Msg{
+    color: white;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.Msg .successMsg{
+    display: flex;
+    flex-direction: column;
+    /* color: rgb(0, 250, 33); */
+    font-size: 1.1rem;
+}
+
+.Msg .successMsg span{
+    font-size: 30px;
+}
+
+.Msg .failMsg{
+    color: rgb(255, 255, 255);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.Msg span{
+    font-size: 30px;
+}
+
+.Msg .failMsg .retryBtn{
+    font-size: unset;
+    color: #3A80A1;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@keyframes spinner {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
 }
 
 @media screen and (max-width:374px){
@@ -674,5 +745,192 @@ body .hero, .projects{
     .contactInfo h2{
         font-size: 1.5rem;
     }
+
+    .loader{
+        border: 5px solid #111111;
+        border-top: 5px solid #3A80A1;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        left: 40%;
+        margin: 20% 0 30% 40%;
+        animation: spinner 2s linear infinite;
+    }
 }
 
+@media screen and (max-width:1023px) and (min-width:768px){
+    /* body .projects, .skills{
+        height: unset;
+        width: 100%;
+    } */
+
+    nav{
+        justify-content: center;
+        
+    }
+
+    nav > ul{
+        padding: 0;
+        gap: 5rem;
+    }
+
+    /* Hero Section */
+    .hero{
+        transform: translateY(5vh);
+        flex-direction: column-reverse;
+    }
+
+    .hero .info h1{
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .hero .info p{
+        font-size: 20px;
+        text-align: center;
+        width: 90vw;
+    }
+
+    .hero .infoBtns{
+        justify-content: center;
+    }
+
+    .hero .infoBtns button{
+        width: 30%;
+        height: 25px;
+    }
+
+    .hero .proImgContainer img{
+        width: 250px;
+    }
+
+    /* Projects Section */
+    .projects > p{
+        font-size: 20px;
+    }
+    
+    .projects .projectsContent{
+        gap: 5vw;
+    }
+    
+    .projects .projectsContent .projectsContainer{
+        width: 60%;
+        gap: 10px;
+    }
+    
+    .projectsContainer .persContainer{
+        font-size: 1.5rem;
+        margin-left: 30px;
+    }
+    
+    .projectsContainer .persContainer > p:hover{
+        font-size: 2rem;
+    }
+    
+    .projectsContainer .persContainer > p#selected{
+        font-size: 2rem;
+    }
+    
+    .projects .projectsContent .info{
+        width: 40%;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        gap: 20vh;
+    }
+
+    .projectsInfo .pInfo >p{
+        width: 90%;
+    }
+
+    /* Skills section */
+    .skills{
+        gap: 5vh;
+    }
+
+    .skills .skillIcons img{
+        width: 60px;
+    }
+
+    .skills .skillIcons .selected{
+        width: 65px;
+    }
+
+    .skills .skillIcons .selected[alt='php']{
+        width: 60px;
+    }
+
+    .skills .skillIcons img:hover{
+        width: 65px;
+    }
+
+    .skills .skillIcons img[alt="php"]:hover{
+        width: 65px;
+    }
+
+    .skills .skillInfo{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skills .skillInfo h3{
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .skills .skillInfo .skillDesc{
+        margin-left: 5px;
+        width: 90vw;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .skills .skillInfo .exp{
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    .exp p{
+        font-size: 14px;
+    }
+
+    /* Footer section */
+    .footer{
+        flex-direction: column;
+        height: unset;
+    }
+
+    .emailDiv{
+        width: 100%;
+    }
+
+    .emailDiv form{
+        gap: 10px;
+        margin-bottom: 50px;
+    }
+
+    .emailDiv form input{
+        width: 70%;
+        height: 30px;
+    }
+
+    .emailDiv form textarea{
+        width: 69%;
+    }
+
+    .emailDiv form button{
+        margin-right: 42%;
+    }
+
+    .infoContainer div{
+        width: 40px;
+        height: 40px;
+    }
+
+    .contactInfo h2{
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}

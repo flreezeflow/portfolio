@@ -37,6 +37,7 @@ try {
     echo json_encode([
         'error' => 'An error occurred while sending the email.',
         'message' => $e->getMessage(),
+        'status' => 'success'
     ]);
 }catch (Exception $e) {
     http_response_code(500);

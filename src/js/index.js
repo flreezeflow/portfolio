@@ -23,6 +23,11 @@ let testimonialInfoEl = document.querySelector(".testimonialInfo");
 let pInfo = document.querySelector(".pInfo")
 let clientFeedback = document.querySelector(".clientFeedback")
 let clientPic = document.querySelector(".clientPic")
+let Msg = document.querySelector(".Msg")
+let contactForm = document.querySelector(".contactForm")
+let successMsg = document.querySelector(".successMsg")
+let failMsg = document.querySelector(".failMsg")
+let loader = document.querySelector('.loader')
 let slideIndex = 0;
 let projCoord = window.innerWidth > 768 ? 600 : 720;
 let contCoord = window.innerWidth > 768 ? 1700 : 2000;
@@ -157,6 +162,9 @@ personal.addEventListener("click", ()=>{
     nextSlidebtn.setAttribute("id","hide")
     prevSlidebtn.setAttribute("id","hide")
     infoTypeBtn.setAttribute("id","hide")
+
+    testimonialInfoEl.setAttribute("id","hide")
+    pInfo.removeAttribute("id")
 
     persContainer.removeAttribute("id")
     projectTitle.textContent = "Personal projects"
@@ -331,41 +339,87 @@ function changeTechStyle(tech){
     }
 }
 
-document.getElementById('contactForm').addEventListener('submit', function(event) {
+function sendEmail() {
     // Prevent the form from submitting
-    event.preventDefault();
+    let errorCount = 0;
     
     // Get form values
     let name = document.getElementById('name').value.trim();
     let email = document.getElementById('email').value.trim();
     let body = document.getElementById('body').value.trim();
+    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     // Basic validation
     if (name === '') {
-        alert('Please enter your name.');
-        return;
+        errorCount++
+        document.getElementById('name').classList.add("contactError")
+    }else{
+        document.getElementById('name').classList.remove("contactError")
     }
 
     if (email === '') {
-        alert('Please enter your email.');
-        return;
+        errorCount++
+        document.getElementById('email').classList.add("contactError")
+    }else if (!emailPattern.test(email)) {
+        errorCount++
+        document.getElementById('emailError').style.display = "block"
+        document.getElementById('email').classList.add("contactError")
+    }else{
+        document.getElementById('emailError').style.display = "none"
+        document.getElementById('email').classList.remove("contactError")
     }
-
-    // Basic email pattern check
-    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-
+    
     if (body === '') {
-        alert('Please enter the email body.');
-        return;
+        errorCount++
+        document.getElementById('body').classList.add("contactError")
+    }else{
+        document.getElementById('body').classList.remove("contactError")
+    }
+
+    if(errorCount === 0){
+        contactForm.setAttribute('id', 'hide')
+        loader.setAttribute('id', 'show')
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("body", body);
+
+        fetch('http://localhost:8000', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+                loader.setAttribute('id', 'hide')
+                Msg.removeAttribute('id')
+            if(data.status === 'success'){
+                successMsg.removeAttribute('id')
+            }else{
+                failMsg.removeAttribute('id')
+                document.querySelector('.failEmoji').removeAttribute('id')
+            }
+            
+            console.log(data.status)
+        })
+        .catch(error => {
+            Msg.removeAttribute('id')
+            loader.setAttribute('id', 'hide')
+            failMsg.setAttribute('id', 'show')
+            document.querySelector('.failEmoji').setAttribute('id', 'show')
+            console.error('Error:'. error);
+        })
     }
 
     // If all checks pass, submit the form
-    this.submit();
-});
+    // this.submit();
+};
+
+function retryEmail(){
+    Msg.setAttribute('id', 'hide')
+    successMsg.setAttribute('id', 'hide')
+    failMsg.setAttribute('id', 'hide')
+    contactForm.removeAttribute('id')
+}
 
 document.addEventListener("DOMContentLoaded", initializeSlider())
 document.addEventListener("DOMContentLoaded", initializeSliderView())
