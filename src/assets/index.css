@@ -2,6 +2,14 @@
     font-family: sans-serif;
 }
 
+#hide{
+    display: none;
+}
+
+#show{
+    display: block;
+}
+
 html{
     background-color: #111111;
     overflow-x: hidden;
@@ -67,8 +75,8 @@ body .hero, .projects{
 }
 
 .hero .info .highlight{
-    color: #3A80A1;
-    text-decoration: underline;
+    color: #00a8f7;
+    /* text-decoration: underline; */
 }
 
 .hero .info h1{
@@ -199,6 +207,11 @@ body .hero, .projects{
     cursor: pointer;
 }
 
+.projectsContainer .persContainer .pers > a{
+    text-decoration: none;
+    color: white;
+}
+
 .projectsContainer .persContainer .persSpan{
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.377);
@@ -254,13 +267,24 @@ body .hero, .projects{
     text-decoration: underline;
 }
 
-.projectsInfo >p{
+.projectsInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projectsInfo p{
     opacity: 50%;
+    text-align: center;
+}
+
+.projectsInfo h3{
+    text-align: center;
 }
 
 .projectsInfo .testimonialInfo{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     gap: 5%;
     margin-bottom: 20px; 
@@ -289,14 +313,6 @@ body .hero, .projects{
     color: white;
     background-color: #181818;
     cursor: pointer;
-}
-
-#hide{
-    display: none;
-}
-
-#show{
-    display: block;
 }
 
 /* Skills section */
@@ -527,6 +543,10 @@ body .hero, .projects{
 @media screen and (max-width:374px){
     body nav > ul{
         gap: 2rem;
+    }
+
+    body .hero .proImgContainer img{
+        width: 55vw;
     }
 
     .hero .info{

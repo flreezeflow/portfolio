@@ -203,7 +203,7 @@ const projectsInfo = [
 
 const testimonialInfo = [{
     "img": "imgUrl",
-    "feedback": "greenline feedback"
+    "feedback": "Thank you for this beautiful website."
 },
 {
     "img": "imgUrl",
@@ -412,7 +412,7 @@ function sendEmail() {
 
     // If all checks pass, submit the form
     // this.submit();
-};
+}
 
 function retryEmail(){
     Msg.setAttribute('id', 'hide')
