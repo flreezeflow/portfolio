@@ -1,0 +1,24 @@
+name: FTP Deploy
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to the 'main' branch (change this if using a different branch)
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Upload files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_PATH }}
+          local-dir: ./ # Uploads everything in the repository
+
+          git-ftp-args: --auto-init --verbose
