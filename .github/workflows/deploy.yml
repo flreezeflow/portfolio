@@ -3,7 +3,7 @@ name: FTP Deploy
 on:
   push:
     branches:
-      - main  # Trigger deployment on push to the 'main' branch (change this if using a different branch)
+      - main  # Trigger deployment on push to the 'main' branch
 
 jobs:
   ftp-deploy:
@@ -15,10 +15,8 @@ jobs:
       - name: Upload files via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_PATH }}
-          local-dir: ./ # Uploads everything in the repository
-
-          git-ftp-args: --auto-init --verbose
+          server: ${{ secrets.FTP_HOST }}       # Your FTP host (e.g., ftpupload.net)
+          username: ${{ secrets.FTP_USERNAME }} # Your FTP username
+          password: ${{ secrets.FTP_PASSWORD }} # Your FTP password
+          server-dir: ${{ secrets.FTP_PATH }}   # Usually /htdocs on InfinityFree
+          local-dir: ./                         # The folder/files to upload (./ for all)
