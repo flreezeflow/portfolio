@@ -28,190 +28,213 @@ let contactForm = document.querySelector(".contactForm")
 let successMsg = document.querySelector(".successMsg")
 let failMsg = document.querySelector(".failMsg")
 let loader = document.querySelector('.loader')
+let indicator;
 let slideIndex = 0;
-let projCoord = window.innerWidth > 768 ? 600 : 720;
-let contCoord = window.innerWidth > 768 ? 1700 : 2000;
 
 // Nav logic
-function nav(page){
-    switch (page){
-        case 'home':
-            window.scrollTo(0,0)
-            home.classList.add("selected")
-            projectsDiv.classList.remove('selected')
-            skills.classList.remove('selected')
-            contact.classList.remove('selected')
-            break;
-        case 'projects':
-            window.scrollTo(0,projCoord)
-            projectsDiv.classList.add('selected')
-            home.classList.remove('selected')
-            skills.classList.remove('selected')
-            contact.classList.remove('selected')
-            break;
-        case 'skills':
-            window.scrollTo(0,1300)
-            skills.classList.add('selected')
-            home.classList.remove('selected')
-            projectsDiv.classList.remove('selected')
-            contact.classList.remove('selected')
-            break;
-        case 'contact':
-            window.scrollTo(0,contCoord)
-            contact.classList.add('selected')
-            home.classList.remove('selected')
-            projectsDiv.classList.remove('selected')
-            skills.classList.remove('selected')
-            break;
-    }
-}
+// Nav logic
+const sections = {
+    home: document.querySelector('.hero'),
+    projects: document.querySelector('.projects'),
+    skills: document.querySelector('.skills'),
+    contact: document.querySelector('.footer')
+};
 
-// Projects logic
-function initializeSlider(){
-    if(projects.length > 0){
-        projectTitle.textContent = projectsInfo[slideIndex].Title
-        projectDesc.textContent = projectsInfo[slideIndex].Description
-        projects[slideIndex].classList.add("displayProject")
-        projects[slideIndex].setAttribute("src", projectsInfo[slideIndex].imgUrl)
-        clientFeedback.textContent = testimonialInfo[slideIndex].feedback
-        clientPic.setAttribute("src", testimonialInfo[slideIndex].img)
-        infoTypeBtn.textContent = "Testimonial"
-    }
-}
+const navSections = {
+    home: document.getElementById('home'),
+    projects: document.getElementById('projects'),
+    skills: document.getElementById('skills'),
+    contact: document.getElementById('contact')
+};
 
-function showSlide(index){
-    projects.forEach(project =>{
-        project.classList.remove("displayProject")
-    });
-    projectTitle.textContent = projectsInfo[index].Title
-    projectDesc.textContent = projectsInfo[index].Description
-    projects[index].classList.add("displayProject")
-    projects[index].setAttribute("src", projectsInfo[index].imgUrl)
-    clientFeedback.textContent = testimonialInfo[index].feedback
-        clientPic.setAttribute("src", testimonialInfo[index].img)
-    console.log(index)
-}
+let sectionPositions = {}; // Global variable to store section positions
 
-function prevSlide(){
-    if(slideIndex >= 0){
-        slideIndex = 0
-        showSlide(slideIndex)
-    }else{
-        slideIndex--
-        showSlide(slideIndex)
-    }
-}
-
-function nextSlide(){
-    if(slideIndex >= projects.length-1){
-        slideIndex = 0
-        showSlide(slideIndex)
-    }else{
-        slideIndex++
-        showSlide(slideIndex)
-    }
-}
-
-function initializeSliderView(){
-    client.classList.add("selectedType");
-    if(container){
-        container.style.width = "45%"
-    }
-}
-
-function createPersonalProjects(){
-
-    persContainer = document.createElement("div");
-    persContainer.classList.add("persContainer");
-
-    p1 = document.createElement("p");
-    p1.classList.add("pers");
-
-
-    p2 = document.createElement("p");
-    p2.classList.add("pers");
-
-    p3 = document.createElement("p");
-    p3.classList.add("pers");
-
-    projectContainer.appendChild(persContainer);
-    persContainer.appendChild(p1);
-    persContainer.appendChild(p2);
-    persContainer.appendChild(p3);
-}
-
-client.addEventListener("click", ()=>{
-    client.classList.add("selectedType");
-    personal.classList.remove("selectedType");
-
-    container.removeAttribute("id")
-    nextSlidebtn.removeAttribute("id")
-    prevSlidebtn.removeAttribute("id")
-    infoTypeBtn.removeAttribute("id")
-
-    persContainer.setAttribute("id", "hide")
-
-    initializeSlider()
+document.addEventListener("DOMContentLoaded", () => {
+    sectionPositions = calculateSectionPositions(); // Initialize section positions after DOM is fully loaded
 });
 
-personal.addEventListener("click", ()=>{
-    personal.classList.add("selectedType");
-    client.classList.remove("selectedType");
+function setSelectedSection(selectedElement) {
+    Object.values(navSections).forEach((section) => {
+        if (section === selectedElement) {
+            section.classList.add("selected");
+        } else {
+            section.classList.remove("selected");
+        }
+    });
+}
 
-    container.setAttribute("id","hide")
-    nextSlidebtn.setAttribute("id","hide")
-    prevSlidebtn.setAttribute("id","hide")
-    infoTypeBtn.setAttribute("id","hide")
+const calculateSectionPositions = () => {
+    return {
+        home: sections.home.getBoundingClientRect().top + window.scrollY,
+        projects: sections.projects.getBoundingClientRect().top + window.scrollY,
+        skills: sections.skills.getBoundingClientRect().top + window.scrollY - 100,
+        contact: sections.contact.getBoundingClientRect().top + window.scrollY
+    };
+};
 
-    testimonialInfoEl.setAttribute("id","hide")
-    pInfo.removeAttribute("id")
+window.onresize = function () {
+    sectionPositions = calculateSectionPositions(); // Recalculate positions on resize
+};
 
-    persContainer.removeAttribute("id")
-    projectTitle.textContent = "Personal projects"
-    projectDesc.textContent = "A few projects I made in my spare time "
-})
-
-infoTypeBtn.addEventListener("click", ()=>{
-
-    if(pInfo.id != "hide"){
-        pInfo.setAttribute("id","hide")
-        testimonialInfoEl.removeAttribute("id")
-        infoTypeBtn.textContent = "Project info"
-    }else{
-        testimonialInfoEl.setAttribute("id","hide")
-        pInfo.removeAttribute("id")
-        infoTypeBtn.textContent = "Testimonial"
+function nav(page) {
+    const sectionPositions = calculateSectionPositions();
+    if (sectionPositions[page] !== undefined) {
+        window.scrollTo({
+            top: sectionPositions[page],
+            behavior: 'smooth'
+        });
+        setSelectedSection(navSections[page]); // Highlight the correct navigation section
+    } else {
+        console.warn('Unknown page:', page);
     }
-})
+}
 
+function getCurrentSection() {
+    const scrollY = window.scrollY + window.innerHeight / 2; // Offset by half the viewport height
+
+    if (scrollY >= sectionPositions.home && scrollY < sectionPositions.projects) {
+        return 'home';
+    } else if (scrollY >= sectionPositions.projects && scrollY < sectionPositions.skills) {
+        return 'projects';
+    } else if (scrollY >= sectionPositions.skills && scrollY < sectionPositions.contact) {
+        return 'skills';
+    } else if (scrollY >= sectionPositions.contact) {
+        return 'contact';
+    }
+}
+
+window.onscroll = function () {
+    const currentSection = getCurrentSection();
+    setSelectedSection(navSections[currentSection]); // Highlight the correct navigation section on scroll
+};
+
+// Projects logic
 const projectsInfo = [
     {
         "id": 0,
-        "Title":"GreenLine.com",
-        "Description":"greenline.com was completed in September 2024 for Greenline Financial Solutions. A loan business focused on micro-loans",
+        "Title": "GreenLine.com",
+        "Description": "greenline.com was completed in September 2024 for Greenline Financial Solutions. A loan business focused on micro-loans",
         "imgUrl": "src/assets/projectPics/greenline.jpg",
         "gitLink": "Go"
     },
-    {
-        "id": 1,
-        "Title":"Next Project.com",
-        "Description":"A website for Next client",
-        "imgUrl": "none",
-        "gitLink": "Go"
-    }
 ];
 
-const testimonialInfo = [{
-    "img": "imgUrl",
-    "feedback": "Thank you for this beautiful website."
-},
-{
-    "img": "imgUrl",
-    "feedback": "next client feedback"
-}]
+const testimonialInfo = [
+    {
+        "img": "src/assets/projectPics/default.jpg",
+        "feedback": "Thank you for this beautiful website"
+    },
+];
+
+function updateSlide(index) {
+    const project = projectsInfo[index];
+    const testimonial = testimonialInfo[index];
+
+    projectTitle.textContent = project.Title;
+    projectDesc.textContent = project.Description;
+    projects.forEach((projectEl, i) => {
+        projectEl.classList.toggle("displayProject", i === index);
+        projectEl.setAttribute("src", i === index ? project.imgUrl : '');
+    });
+    clientFeedback.textContent = testimonial.feedback;
+    clientPic.setAttribute("src", testimonial.img);
+}
+
+function initializeSlider() {
+    if (projects.length > 0) {
+        updateSlide(slideIndex);
+    }
+}
+
+function changeSlide(direction) {
+    slideIndex = (slideIndex + direction + projects.length) % projects.length;
+    updateSlide(slideIndex);
+}
+
+function initializeSliderView() {
+    client.classList.add("selectedType");
+    if (container) {
+        container.style.width = "45%";
+    }
+}
+
+function createPersonalProjects() {
+    persContainer = document.createElement("div");
+    persContainer.classList.add("persContainer");
+
+    ['p1', 'p2', 'p3'].forEach((_, index) => {
+        const p = document.createElement("p");
+        p.classList.add("pers");
+        persContainer.appendChild(p);
+    });
+
+    projectContainer.appendChild(persContainer);
+}
+
+function toggleView(type) {
+    const isClient = type === 'client';
+    client.classList.toggle("selectedType", isClient);
+    personal.classList.toggle("selectedType", !isClient);
+
+    container.setAttribute("id", isClient ? "" : "hide");
+    nextSlidebtn.setAttribute("id", isClient ? "" : "hide");
+    prevSlidebtn.setAttribute("id", isClient ? "" : "hide");
+    infoTypeBtn.setAttribute("id", isClient ? "" : "hide");
+
+    if (isClient) {
+        initializeSlider();
+        persContainer.setAttribute("id", "hide");
+    } else {
+        projectTitle.textContent = "Personal projects";
+        projectDesc.textContent = "A few projects I made in my spare time ";
+        persContainer.removeAttribute("id");
+        // testimonialInfoEl.setAttribute("id", "hide");
+    }
+
+    switchInfType(type);
+}
+
+function switchInfType(type){
+// Bug 1. When swithcing between client and personal the info type also switches
+    switch (type) {
+        case 'client':
+            pInfo.setAttribute("id","");
+            testimonialInfoEl.setAttribute("id","hide");
+            infoTypeBtn.textContent = "Client rating";
+            break;
+        case 'personal':
+            pInfo.setAttribute("id","");
+            testimonialInfoEl.setAttribute("id","hide");
+            break;
+        case 'rating':
+            const isInfoHidden = pInfo.id === "hide";
+            pInfo.setAttribute("id", isInfoHidden ? "" : "hide");
+            testimonialInfoEl.setAttribute("id", isInfoHidden ? "hide" : "");
+            infoTypeBtn.textContent = isInfoHidden ? "Client rating" : "Project info";
+            break;
+        default:
+            pInfo.setAttribute("id","");
+            testimonialInfoEl.setAttribute("id","hide");
+            break;
+    }
+}
+
+client.addEventListener("click", () => toggleView('client'));
+personal.addEventListener("click", () => toggleView('personal'));
+infoTypeBtn.addEventListener("click", () => {
+    const type = 'rating'
+    switchInfType(type)
+});
+
+function prevSlide() {
+    changeSlide(-1);
+}
+
+function nextSlide() {
+    changeSlide(1);
+}
 
 // Skills logic
-
 const techInfo = [{
     "Title":"HTML (Hypertext Markup Language)",
     "Description":"HTML is the standard language used to create and structure content on the web. It consists of a series of elements or tags that define the different parts of a webpage, such as headings, paragraphs, links, images, and other multimedia content.",
@@ -339,6 +362,7 @@ function changeTechStyle(tech){
     }
 }
 
+// Contact logic
 function sendEmail() {
     // Prevent the form from submitting
     let errorCount = 0;

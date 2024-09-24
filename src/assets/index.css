@@ -95,6 +95,10 @@ body .hero, .projects{
     gap: 20px;
 }
 
+.proImgContainer{
+    margin-right: 2rem;
+}
+
 .hero .infoBtns button{
     width: 20%;
     height: 30px;
@@ -547,6 +551,11 @@ body .hero, .projects{
 
     body .hero .proImgContainer img{
         width: 55vw;
+
+    }
+
+    body .hero .proImgContainer{
+        margin: 0;
     }
 
     .hero .info{
@@ -585,6 +594,10 @@ body .hero, .projects{
         flex-direction: column-reverse;
     }
 
+    .hero .info{
+        margin: 0;
+    }
+
     .hero .info h1{
         font-size: 24px;
         text-align: center;
@@ -607,6 +620,10 @@ body .hero, .projects{
 
     .hero .proImgContainer img{
         width: 60vw;
+    }
+
+    body .hero .proImgContainer{
+        margin: 0;
     }
 
     /* Projects section */
