@@ -13,26 +13,24 @@ const skillTitle = document.querySelector(".skillTitle");
 const skillDesc = document.querySelector(".skillDesc");
 const expMeter = document.querySelector(".expMeter");
 const expPercent =  document.querySelector(".expPercent")
-let nextSlidebtn = document.querySelector(".next");
-let prevSlidebtn = document.querySelector(".prev");
-let container = document.querySelector(".container");
-let projects = document.querySelectorAll("#project");
-let persContainer = document.querySelector(".persContainer");
-let infoTypeBtn = document.getElementById("infoTypeBtn")
-let testimonialInfoEl = document.querySelector(".testimonialInfo");
-let pInfo = document.querySelector(".pInfo")
-let clientFeedback = document.querySelector(".clientFeedback")
-let clientPic = document.querySelector(".clientPic")
-let Msg = document.querySelector(".Msg")
-let contactForm = document.querySelector(".contactForm")
-let successMsg = document.querySelector(".successMsg")
-let failMsg = document.querySelector(".failMsg")
-let loader = document.querySelector('.loader')
+const nextSlidebtn = document.querySelector(".next");
+const prevSlidebtn = document.querySelector(".prev");
+const container = document.querySelector(".container");
+const projects = document.querySelectorAll("#project");
+const persContainer = document.querySelector(".persContainer");
+// const infoTypeBtn = document.getElementById("infoTypeBtn")
+// const testimonialInfoEl = document.querySelector(".testimonialInfo");
+const pInfo = document.querySelector(".pInfo")
+const clientFeedback = document.querySelector(".clientFeedback")
+const clientPic = document.querySelector(".clientPic")
+const Msg = document.querySelector(".Msg")
+const contactForm = document.querySelector(".contactForm")
+const successMsg = document.querySelector(".successMsg")
+const failMsg = document.querySelector(".failMsg")
+const loader = document.querySelector('.loader')
 let indicator;
 let slideIndex = 0;
 
-// Nav logic
-// Nav logic
 const sections = {
     home: document.querySelector('.hero'),
     projects: document.querySelector('.projects'),
@@ -47,10 +45,10 @@ const navSections = {
     contact: document.getElementById('contact')
 };
 
-let sectionPositions = {}; // Global variable to store section positions
+let sectionPositions = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-    sectionPositions = calculateSectionPositions(); // Initialize section positions after DOM is fully loaded
+    sectionPositions = calculateSectionPositions();
 });
 
 function setSelectedSection(selectedElement) {
@@ -119,16 +117,16 @@ const projectsInfo = [
     },
 ];
 
-const testimonialInfo = [
-    {
-        "img": "src/assets/projectPics/default.jpg",
-        "feedback": "Thank you for this beautiful website"
-    },
-];
+// const testimonialInfo = [
+//     {
+//         "img": "src/assets/projectPics/default.jpg",
+//         "feedback": "Thank you for this beautiful website"
+//     },
+// ];
 
 function updateSlide(index) {
     const project = projectsInfo[index];
-    const testimonial = testimonialInfo[index];
+    // const testimonial = testimonialInfo[index];
 
     projectTitle.textContent = project.Title;
     projectDesc.textContent = project.Description;
@@ -136,8 +134,8 @@ function updateSlide(index) {
         projectEl.classList.toggle("displayProject", i === index);
         projectEl.setAttribute("src", i === index ? project.imgUrl : '');
     });
-    clientFeedback.textContent = testimonial.feedback;
-    clientPic.setAttribute("src", testimonial.img);
+    // clientFeedback.textContent = testimonial.feedback;
+    // clientPic.setAttribute("src", testimonial.img);
 }
 
 function initializeSlider() {
@@ -179,7 +177,7 @@ function toggleView(type) {
     container.setAttribute("id", isClient ? "" : "hide");
     nextSlidebtn.setAttribute("id", isClient ? "" : "hide");
     prevSlidebtn.setAttribute("id", isClient ? "" : "hide");
-    infoTypeBtn.setAttribute("id", isClient ? "" : "hide");
+    // infoTypeBtn.setAttribute("id", isClient ? "" : "hide");
 
     if (isClient) {
         initializeSlider();
@@ -195,23 +193,22 @@ function toggleView(type) {
 }
 
 function switchInfType(type){
-// Bug 1. When swithcing between client and personal the info type also switches
     switch (type) {
         case 'client':
             pInfo.setAttribute("id","");
-            testimonialInfoEl.setAttribute("id","hide");
-            infoTypeBtn.textContent = "Client rating";
+            // testimonialInfoEl.setAttribute("id","hide");
+            // infoTypeBtn.textContent = "Client rating";
             break;
         case 'personal':
             pInfo.setAttribute("id","");
-            testimonialInfoEl.setAttribute("id","hide");
+            // testimonialInfoEl.setAttribute("id","hide");
             break;
-        case 'rating':
-            const isInfoHidden = pInfo.id === "hide";
-            pInfo.setAttribute("id", isInfoHidden ? "" : "hide");
-            testimonialInfoEl.setAttribute("id", isInfoHidden ? "hide" : "");
-            infoTypeBtn.textContent = isInfoHidden ? "Client rating" : "Project info";
-            break;
+        // case 'rating':
+        //     const isInfoHidden = pInfo.id === "hide";
+        //     pInfo.setAttribute("id", isInfoHidden ? "" : "hide");
+        //     testimonialInfoEl.setAttribute("id", isInfoHidden ? "hide" : "");
+        //     infoTypeBtn.textContent = isInfoHidden ? "Client rating" : "Project info";
+        //     break;
         default:
             pInfo.setAttribute("id","");
             testimonialInfoEl.setAttribute("id","hide");
@@ -221,10 +218,10 @@ function switchInfType(type){
 
 client.addEventListener("click", () => toggleView('client'));
 personal.addEventListener("click", () => toggleView('personal'));
-infoTypeBtn.addEventListener("click", () => {
-    const type = 'rating'
-    switchInfType(type)
-});
+// infoTypeBtn.addEventListener("click", () => {
+//     const type = 'rating'
+//     switchInfType(type)
+// });
 
 function prevSlide() {
     changeSlide(-1);
@@ -271,93 +268,45 @@ const techInfo = [{
     "Iconcolor":"#41A6B0"
 }];
 
+function checkTech(index, mWidth, time){
+    for (let i = 0; i < techIcons.length; i++) {
+        techIcons[i].classList.remove("selected");
+    }
+
+    techIcons[index].classList.add("selected")
+    skillTitle.textContent = techInfo[index].Title
+    skillDesc.textContent = techInfo[index].Description
+    expMeter.style.borderColor = techInfo[index].Iconcolor
+    expMeter.style.width = mWidth
+    expPercent.textContent = time
+}
+
 function initializeTechIcon(){
-    techIcons[0].classList.add("selected")
-    skillTitle.textContent = techInfo[0].Title
-    skillDesc.textContent = techInfo[0].Description
-    expMeter.style.borderColor = techInfo[0].Iconcolor
-    expMeter.style.width = "89%"
-    expPercent.textContent = "89%"
+    checkTech(0, "89%", "3+ years")
 }
 
 function changeTechStyle(tech){
     switch(tech){
         case "html":
-            for (let index = 0; index < techIcons.length; index++) {
-                techIcons[index].classList.remove("selected");
-            }
-            techIcons[0].classList.add("selected")
-            skillTitle.textContent = techInfo[0].Title
-            skillDesc.textContent = techInfo[0].Description
-            expMeter.style.borderColor = techInfo[0].Iconcolor
-            expMeter.style.width = "89%"
-            expPercent.textContent = "89%"
+            checkTech(0, "89%", "3+ years")
             break;
         case "css":
-            for (let index = 0; index < techIcons.length; index++) {
-                techIcons[index].classList.remove("selected");
-            }
-            techIcons[1].classList.add("selected")
-            skillTitle.textContent = techInfo[1].Title
-            skillDesc.textContent = techInfo[1].Description
-            expMeter.style.borderColor = techInfo[1].Iconcolor
-            expMeter.style.width = "87%"
-            expPercent.textContent = "87%"
+            checkTech(1, "87%", "3+ years")
             break;
         case "js":
-            for (let index = 0; index < techIcons.length; index++) {
-                techIcons[index].classList.remove("selected");
-            }
-            techIcons[2].classList.add("selected")
-            skillTitle.textContent = techInfo[2].Title
-            skillDesc.textContent = techInfo[2].Description
-            expMeter.style.borderColor = techInfo[2].Iconcolor
-            expMeter.style.width = "60%"
-            expPercent.textContent = "60%"
+            checkTech(2, "60%", "2 years")
             break;
         case "vue":
-            for (let index = 0; index < techIcons.length; index++) {
-                techIcons[index].classList.remove("selected");
-            }
-            techIcons[3].classList.add("selected")
-            skillTitle.textContent = techInfo[3].Title
-            skillDesc.textContent = techInfo[3].Description
-            expMeter.style.borderColor = techInfo[3].Iconcolor
-            expMeter.style.width = "57%"
-            expPercent.textContent = "57%"
+            checkTech(3, "57%", "2 years")
             break;
         case "php":
-            for (let index = 0; index < techIcons.length; index++) {
-                techIcons[index].classList.remove("selected");
-            }
-            techIcons[4].classList.add("selected")
-            skillTitle.textContent = techInfo[4].Title
-            skillDesc.textContent = techInfo[4].Description
-            expMeter.style.borderColor = techInfo[4].Iconcolor
-            expMeter.style.width = "76%"
-            expPercent.textContent = "76%"
+            checkTech(4, "76%", "3+ years")
             break;
         case "sql":
-            for (let index = 0; index < techIcons.length; index++) {
-                techIcons[index].classList.remove("selected");
-            }
-            techIcons[5].classList.add("selected")
-            skillTitle.textContent = techInfo[5].Title
-            skillDesc.textContent = techInfo[5].Description
-            expMeter.style.borderColor = techInfo[5].Iconcolor
-            expMeter.style.width = "68%"
-            expPercent.textContent = "68%"
+            checkTech(5, "68%", "3+ years")
             break;
         case "tlw":
-            for (let index = 0; index < techIcons.length; index++) {
-                techIcons[index].classList.remove("selected");
-            }
-            techIcons[6].classList.add("selected")
-            skillTitle.textContent = techInfo[6].Title
-            skillDesc.textContent = techInfo[6].Description
-            expMeter.style.borderColor = techInfo[6].Iconcolor
-            expMeter.style.width = "85%"
-            expPercent.textContent = "85%"
+            checkTech(6, "85%", "3+ years")
             break;
     }
 }
@@ -408,7 +357,7 @@ function sendEmail() {
         formData.append("email", email);
         formData.append("body", body);
 
-        fetch('http://localhost:8000', {
+        fetch('../src/php/index.php', {
             method: 'POST',
             body: formData
         })
@@ -445,6 +394,8 @@ function retryEmail(){
     contactForm.removeAttribute('id')
 }
 
-document.addEventListener("DOMContentLoaded", initializeSlider())
-document.addEventListener("DOMContentLoaded", initializeSliderView())
-document.addEventListener("DOMContentLoaded", initializeTechIcon())
+document.addEventListener("DOMContentLoaded", ()=>{
+    initializeSlider()
+    initializeSliderView()
+    initializeTechIcon()
+})
