@@ -158,8 +158,17 @@ body .hero, .projects{
 .projects .projectsContent{
     width: 100%;
     display: flex;
+}
+
+.projects .projectsContent[id="clientP"]{
     flex-direction: row;
     gap: 10vw;
+}
+
+.projects #persP{
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
 }
 
 .projects .projectsContent .projectsContainer{
@@ -204,14 +213,56 @@ body .hero, .projects{
 }
 
 .projectsContainer .persContainer{
-    margin-bottom: 10%;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.projectsContainer .persContainer .heading{
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.projectsContainer .persContainer .heading a{
+    text-decoration: none;
+    color: white;
     font-size: 2rem;
 }
 
-.projectsContainer .persContainer > p:hover{
-    font-size: 2.5rem;
-    color: rgba(255, 255, 255, 0.507);
-    transition: all 1s ease-in-out;
+.projectsContainer .persContainer a{
+    color: #3A80A1;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.projectsContainer .persContainer p{
+    font-size: 1rem;
+    opacity: 0.5;
+    margin-top: 0;
+    margin-bottom: 5%;
+}
+
+.line{
+    border: 1px solid white;
+    width: 40%;
+    
+}
+
+#line1{
+    animation: incWidth 2s linear forwards;
+}
+
+#line2{
+    animation: incWidth 2s linear 0.2s forwards;
+}
+
+#line3{
+    animation: incWidth 2s linear 0.4s forwards;
+}
+
+@keyframes incWidth {
+    to{
+        width: 100%;
+    }
 }
 
 .projectsContainer .persContainer > p{
@@ -252,7 +303,7 @@ body .hero, .projects{
     }
 }
 
-.projects .projectsContent .info{
+.projects .projectsContent[id="clientP"] .info{
     width: 30%;
     height: 80vh;
     display: flex;
@@ -260,13 +311,25 @@ body .hero, .projects{
     gap: 20vh;
 }
 
-.projects .projectsContent .info .projectsType > ul{
+.projects .projectsContent[id="persP"] .info{
+    width: 100%;
+}
+
+.projects .projectsContent[id="clientP"] .info .projectsType > ul{
     padding: 0;
     display: flex;
     flex-direction: row;
     gap: 10%;
     list-style: none;
     font-size: 16px;
+}
+
+.projects .projectsContent[id="persP"] .info .projectsType > ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+    list-style: none;
 }
 
 .projectsType > ul li{
@@ -286,11 +349,6 @@ body .hero, .projects{
 
 .projectsInfo p{
     opacity: 50%;
-    text-align: center;
-}
-
-.projectsInfo h3{
-    text-align: center;
 }
 
 .projectsInfo .testimonialInfo{
@@ -334,38 +392,42 @@ body .hero, .projects{
     align-items: center;
     gap: 10vh;
     height: 65vh;
+    color: white;
 }
 
-.skills .skillIcons img{
+.skills .skillIcons{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.skills .skillIcons .imgDisplay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #181818;
+    width: 7vw;
+    height: 7vw;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #000;
+}
+
+.skills .skillIcons .imgDisplay:hover{
+    border: 3px solid #00a8f7;
+    transition: all 0.5s;
+}
+
+.skills .skillIcons .displayContainer .imgDisplay img{
     width: 70px;
     margin: 15px;
-    filter: saturate(0);
 }
 
 .skills .skillIcons img[alt='php']{
     margin-bottom: 25px;
 }
 
-.skills .skillIcons img[alt='php']:hover{
-    filter: saturate(1);
-    width: 100px;
-    transition:all 0.5s;
-}
-
-.skills .skillIcons img:hover{
-    filter: saturate(1);
-    width: 90px;
-    transition:all 0.5s;
-}
-
 .skills .skillIcons .selected{
-    filter: saturate(1);
-    width: 90px;
-}
-
-.skills .skillIcons .selected[alt='php']{
-    filter: saturate(1);
-    width: 100px;
+    border: 3px solid #00a8f7;
 }
 
 .skills .skillInfo{
@@ -373,37 +435,15 @@ body .hero, .projects{
     color: white;
 }
 
-.skills .skillInfo .exp{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.skills .displayContainer .skillTitle{
+    text-align: center;
+    opacity: 0;
 }
 
-.skills .skillInfo .skillDesc{
-    width: 35%;
-}
-
-.exp p{
-    font-weight: bold;
-    margin: 0 5px 0 0;
-}
-
-.exp .expMeterContainer{
-    width: 350px;
-    height: 15px;
-    background-color: #181818;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.expMeterContainer .expMeter{
-    border: 2px solid;
-    margin: 6px 0 5px 5px;
-    transition: all 1.5s;
-}
-
-.skills .skillInfo .exp span{
-    margin-left: 1%;
+.skills .displayContainer .skillTitle[id="selected"]{
+    opacity: 0.5;
+    transition: all 1s;
+    transform: translateY(4px);
 }
 
 /* Footer section */
@@ -648,17 +688,20 @@ body .hero, .projects{
         text-align: center;
     }
 
-    .projectsContainer .persContainer{
-        margin-bottom: 0%;
+    .projectsContainer .persContainer .heading a{
         font-size: 1.5rem;
+    }
+
+    .projectsContainer .persContainer a{
+        font-size: 1rem;
+    }
+
+    .projectsContainer .persContainer p{
+        font-size: 12px;
     }
 
     .projectsContainer .persContainer > p{
         text-align: center;
-    }
-    
-    .projectsContainer .persContainer > p:hover{
-        font-size: 1.7rem;
     }
 
     .projects .projectsContent .info .projectsType > ul{
@@ -666,7 +709,7 @@ body .hero, .projects{
         padding: 0;
     }
 
-    .projects .projectsContent{
+    .projects .projectsContent[id="clientP"]{
         flex-direction: column;
         gap: 0;
     }
@@ -675,6 +718,11 @@ body .hero, .projects{
         width: 100%;
         height: 60vh;
         gap: 15px;
+    }
+
+    .projects .projectsContent[id="persP"] .projectsContainer{
+        height: unset;
+        width: 80%;
     }
 
     .projectsContainer .next{
@@ -687,7 +735,7 @@ body .hero, .projects{
         height: 30px;
     }
 
-    .projects .projectsContent .info{
+    .projects .projectsContent[id="clientP"] .info{
         width: 100%;
         height: unset;
         text-align: center;
@@ -695,70 +743,45 @@ body .hero, .projects{
         margin-bottom: 10vh;
     }
 
-    .projectsInfo .testimonialInfo{
-        justify-content: center;
-        text-align: center;
-    }
-
     /* Skills */
     .skills{
         gap: 10px;
-        margin-bottom: 20vh;
+        margin-bottom: 10vh;
     }
 
     .skills .skillIcons{
+        width: 100%;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
         align-items: center;
+        gap: 35px;
     }
 
-    .skills .skillIcons img{
+    .skills .skillIcons .imgDisplay{
+        width: 20vw;
+        height: 20vw;
+    }
+
+    .skills .skillIcons .displayContainer .imgDisplay img{
         width: 50px;
     }
 
-    .skills .skillIcons .selected{
-        width: 60px;
+    .skills .displayContainer .skillTitle[id="selected"]{
+        transform: translateY(2px);
     }
 
-    .skills .skillIcons .selected[alt='php']{
-        width: 60px;
-    }
-
-    .skills .skillIcons img:hover{
-        width: 60px;
-    }
-
-    .skills .skillIcons img[alt="php"]:hover{
-        width: 60px;
+    .skills .displayContainer .skillTitle{
+        font-size: 14px;
     }
 
     .skills .skillInfo{
         width: 100%;
     }
 
-    .skills .skillInfo h3{
+    .skills h1{
         text-align: center;
-        font-size: 16px;
-    }
-
-    .skills .skillInfo .skillDesc{
-        margin-left: 5px;
-        width: 100%;
-        font-size: 14px;
-    }
-
-    .skills .skillInfo .exp{
-        gap: 30px;
-        flex-direction: column;
-    }
-
-    .exp p{
-        font-size: 14px;
-    }
-
-    .skills .skillInfo .exp span{
-        margin: 0;
+        font-size: 24px;
     }
 
     /* Footer section */
@@ -811,10 +834,6 @@ body .hero, .projects{
 }
 
 @media screen and (max-width:1023px) and (min-width:768px){
-    /* body .projects, .skills{
-        height: unset;
-        width: 100%;
-    } */
 
     nav{
         justify-content: center;
@@ -861,18 +880,17 @@ body .hero, .projects{
         font-size: 20px;
     }
     
-    .projects .projectsContent{
+    .projects .projectsContent[id="clientP"]{
         gap: 5vw;
     }
-    
+
     .projects .projectsContent .projectsContainer{
         width: 60%;
         gap: 10px;
     }
-    
+
     .projectsContainer .persContainer{
         font-size: 1.5rem;
-        margin-left: 30px;
     }
     
     .projectsContainer .persContainer > p:hover{
@@ -883,12 +901,16 @@ body .hero, .projects{
         font-size: 2rem;
     }
     
-    .projects .projectsContent .info{
+    .projects .projectsContent[id="clientP"] .info{
         width: 40%;
         height: 80vh;
         display: flex;
         flex-direction: column;
         gap: 20vh;
+    }
+
+    .projects .projectsContent[id="persP"] .info{
+        gap: 10vh;
     }
 
     .projectsInfo .pInfo >p{
@@ -897,55 +919,19 @@ body .hero, .projects{
 
     /* Skills section */
     .skills{
-        gap: 5vh;
-    }
-
-    .skills .skillIcons img{
-        width: 60px;
-    }
-
-    .skills .skillIcons .selected{
-        width: 65px;
-    }
-
-    .skills .skillIcons .selected[alt='php']{
-        width: 60px;
-    }
-
-    .skills .skillIcons img:hover{
-        width: 65px;
-    }
-
-    .skills .skillIcons img[alt="php"]:hover{
-        width: 65px;
-    }
-
-    .skills .skillInfo{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+        gap: 5vw;
+        justify-content: center;
         align-items: center;
     }
 
-    .skills .skillInfo h3{
-        text-align: center;
-        font-size: 16px;
-    }
-
-    .skills .skillInfo .skillDesc{
-        margin-left: 5px;
-        width: 90vw;
-        font-size: 14px;
-        text-align: center;
-    }
-
-    .skills .skillInfo .exp{
+    .skills .skillIcons{
+        flex-wrap: wrap;
         gap: 30px;
-        flex-direction: column;
     }
 
-    .exp p{
-        font-size: 14px;
+    .skills .skillIcons .imgDisplay{
+        width: 10vw;
+        height: 10vw;
     }
 
     /* Footer section */

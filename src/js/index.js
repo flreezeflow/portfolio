@@ -8,18 +8,14 @@ const projectDesc = document.getElementById('projectDesc');
 const client = document.getElementById("client");
 const personal = document.getElementById("personal");
 const projectContainer = document.querySelector(".projectsContainer");
+const projectContent = document.querySelector(".projectsContent")
 const techIcons = document.querySelectorAll("#techIcon");
-const skillTitle = document.querySelector(".skillTitle");
-const skillDesc = document.querySelector(".skillDesc");
-const expMeter = document.querySelector(".expMeter");
-const expPercent =  document.querySelector(".expPercent")
+const skillTitle = document.querySelectorAll(".skillTitle");
 const nextSlidebtn = document.querySelector(".next");
 const prevSlidebtn = document.querySelector(".prev");
 const container = document.querySelector(".container");
 const projects = document.querySelectorAll("#project");
 const persContainer = document.querySelector(".persContainer");
-// const infoTypeBtn = document.getElementById("infoTypeBtn")
-// const testimonialInfoEl = document.querySelector(".testimonialInfo");
 const pInfo = document.querySelector(".pInfo")
 const clientFeedback = document.querySelector(".clientFeedback")
 const clientPic = document.querySelector(".clientPic")
@@ -28,6 +24,8 @@ const contactForm = document.querySelector(".contactForm")
 const successMsg = document.querySelector(".successMsg")
 const failMsg = document.querySelector(".failMsg")
 const loader = document.querySelector('.loader')
+const imgDisplay = document.querySelectorAll(".imgDisplay")
+
 let indicator;
 let slideIndex = 0;
 
@@ -117,13 +115,6 @@ const projectsInfo = [
     },
 ];
 
-// const testimonialInfo = [
-//     {
-//         "img": "src/assets/projectPics/default.jpg",
-//         "feedback": "Thank you for this beautiful website"
-//     },
-// ];
-
 function updateSlide(index) {
     const project = projectsInfo[index];
     // const testimonial = testimonialInfo[index];
@@ -177,7 +168,8 @@ function toggleView(type) {
     container.setAttribute("id", isClient ? "" : "hide");
     nextSlidebtn.setAttribute("id", isClient ? "" : "hide");
     prevSlidebtn.setAttribute("id", isClient ? "" : "hide");
-    // infoTypeBtn.setAttribute("id", isClient ? "" : "hide");
+    projectContent.setAttribute("id", isClient ? "clientP" : "persP");
+    
 
     if (isClient) {
         initializeSlider();
@@ -186,9 +178,9 @@ function toggleView(type) {
         projectTitle.textContent = "Personal projects";
         projectDesc.textContent = "A few projects I made in my spare time ";
         persContainer.removeAttribute("id");
-        // testimonialInfoEl.setAttribute("id", "hide");
     }
 
+    document.querySelector(".projectsInfo").setAttribute("id", isClient ? "" : "hide")
     switchInfType(type);
 }
 
@@ -196,19 +188,10 @@ function switchInfType(type){
     switch (type) {
         case 'client':
             pInfo.setAttribute("id","");
-            // testimonialInfoEl.setAttribute("id","hide");
-            // infoTypeBtn.textContent = "Client rating";
             break;
         case 'personal':
             pInfo.setAttribute("id","");
-            // testimonialInfoEl.setAttribute("id","hide");
             break;
-        // case 'rating':
-        //     const isInfoHidden = pInfo.id === "hide";
-        //     pInfo.setAttribute("id", isInfoHidden ? "" : "hide");
-        //     testimonialInfoEl.setAttribute("id", isInfoHidden ? "hide" : "");
-        //     infoTypeBtn.textContent = isInfoHidden ? "Client rating" : "Project info";
-        //     break;
         default:
             pInfo.setAttribute("id","");
             testimonialInfoEl.setAttribute("id","hide");
@@ -218,10 +201,6 @@ function switchInfType(type){
 
 client.addEventListener("click", () => toggleView('client'));
 personal.addEventListener("click", () => toggleView('personal'));
-// infoTypeBtn.addEventListener("click", () => {
-//     const type = 'rating'
-//     switchInfType(type)
-// });
 
 function prevSlide() {
     changeSlide(-1);
@@ -232,81 +211,43 @@ function nextSlide() {
 }
 
 // Skills logic
-const techInfo = [{
-    "Title":"HTML (Hypertext Markup Language)",
-    "Description":"HTML is the standard language used to create and structure content on the web. It consists of a series of elements or tags that define the different parts of a webpage, such as headings, paragraphs, links, images, and other multimedia content.",
-    "Iconcolor":"#EF6634"
-},
-{
-    "Title":"CSS (Cascading Style Sheets)",
-    "Description":"CSS allows you to apply styles such as colors, fonts, layouts, and spacing to HTML elements, enabling you to create visually appealing and consistent web pages.",
-    "Iconcolor":"#006FB8"
-},
-{
-    "Title":"Javascript",
-    "Description":"A versatile, high-level programming language primarily used to create dynamic and interactive content on websites. It is an essential part of web development, along with HTML and CSS, allowing developers to add functionality, control multimedia, animate elements, and more.",
-    "Iconcolor":"#F8D531"
-},
-{
-    "Title":"Vue.js",
-    "Description":"Vue.js is a popular, open-source JavaScript framework for building user interfaces and single-page applications (SPAs). It is known for its simplicity, flexibility, and ease of integration.",
-    "Iconcolor":"#4EB887"
-},
-{
-    "Title":"PHP (Hypertext Preprocessor)",
-    "Description":"PHP  is a popular, open-source server-side scripting language widely used for web development. It is particularly well-suited for creating dynamic web pages and applications, as it can easily interact with databases, manage sessions, and handle server-side logic. ",
-    "Iconcolor":"#8992BD"
-},
-{
-    "Title":"SQL (Structured Query Language)",
-    "Description":"SQL is a standard programming language used to manage and manipulate relational databases.",
-    "Iconcolor":"#3E82A7"
-},
-{
-    "Title":"Tailwind CSS",
-    "Description":"A utility-first CSS framework designed to give developers complete control over the styling of their HTML.",
-    "Iconcolor":"#41A6B0"
-}];
 
-function checkTech(index, mWidth, time){
-    for (let i = 0; i < techIcons.length; i++) {
-        techIcons[i].classList.remove("selected");
+function setTech(index){
+    for (let i = 0; i < imgDisplay.length; i++) {
+        imgDisplay[i].classList.remove("selected");
+        skillTitle[i].removeAttribute("id");
     }
 
-    techIcons[index].classList.add("selected")
-    skillTitle.textContent = techInfo[index].Title
-    skillDesc.textContent = techInfo[index].Description
-    expMeter.style.borderColor = techInfo[index].Iconcolor
-    expMeter.style.width = mWidth
-    expPercent.textContent = time
+    imgDisplay[index].classList.add("selected")
+    skillTitle[index].setAttribute("id","selected")
 }
 
 function initializeTechIcon(){
-    checkTech(0, "89%", "3+ years")
+    setTech(0)
 }
 
 function changeTechStyle(tech){
     switch(tech){
         case "html":
-            checkTech(0, "89%", "3+ years")
+            setTech(0)
             break;
         case "css":
-            checkTech(1, "87%", "3+ years")
+            setTech(1)
             break;
         case "js":
-            checkTech(2, "60%", "2 years")
+            setTech(2)
             break;
         case "vue":
-            checkTech(3, "57%", "2 years")
+            setTech(3)
             break;
         case "php":
-            checkTech(4, "76%", "3+ years")
+            setTech(4)
             break;
         case "sql":
-            checkTech(5, "68%", "3+ years")
+            setTech(5)
             break;
         case "tlw":
-            checkTech(6, "85%", "3+ years")
+            setTech(6)
             break;
     }
 }

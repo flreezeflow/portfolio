@@ -38,25 +38,41 @@
 
     <div class="projects">
         <p>Check out some of the projects I've created</p>
-        <div class="projectsContent">
+        <div class="projectsContent" id="clientP">
             <div class="projectsContainer">
                 <button class="prev" onclick="prevSlide()"></button>
                 <div class="container">
                     <img src="" alt="" id="project">
-                    <!-- <img src="" alt="" id="project"> -->
                 </div>
                 <button class="next" onclick="nextSlide()"></button>
 
                 <div class="persContainer" id="hide">
-                    <p class="pers"><a href="https://freezeflow.github.io/weatherApp/">Weather app </a><span class="persSpan"><a href="https://github.com/freezeflow/weatherApp">source code</a></span></p>
-                    <p class="pers"><a href="https://freezeflow.github.io/Rps/">Rock paper scissors </a><span class="persSpan"><a href="https://github.com/freezeflow/Rps">source code</a></span></p>
-                    <p class="pers"><a href="https://freezeflow.github.io/Stopwatch/">Stopwatch </a><span class="persSpan"><a href="https://github.com/freezeflow/Stopwatch">source code</a></span></p>
+                    <div class="persC">
+                        <h3 class="heading"><a href="https://freezeflow.github.io/weatherApp/">Weather app </a></h3>
+                        <p>A simple weather app made using javascript and openWeather api</p>
+                        <a href="https://github.com/freezeflow/weatherApp">Source code on github</a>
+                        <div class="line" id="line1"></div>
+                    </div>
+
+                    <div class="persC">
+                        <h3 class="heading"><a href="https://freezeflow.github.io/Rps/">Rock paper scissors </a></h3>
+                        <p>Classic rock paper scissors game</p>
+                        <a href="https://github.com/freezeflow/Rps">Source code on github</a>
+                        <div class="line" id="line2"></div>
+                    </div>
+                        
+                    <div class="persC">
+                        <h3 class="heading"><a href="https://freezeflow.github.io/Stopwatch/">Stopwatch</a></h3>
+                        <p>A simple stopwatch</p>
+                        <a href="https://github.com/freezeflow/Stopwatch">Source code on github</a>
+                        <div class="line" id="line3"></div>
+                    </div>
                 </div>
             </div>
             <div class="info">
                 <div class="projectsType">
                     <ul>
-                        <li id="client">Featured Projects</li>
+                        <li id="client">Featured projects</li>
                         <li id="personal">Personal projects</li>
                     </ul>
                 </div>
@@ -65,11 +81,6 @@
                         <h3 id="projectTitle"></h3>
                         <p id="projectDesc"></p>
                     </div>
-                    <!-- <div class="testimonialInfo" id="hide">
-                        <div class="picDiv"><img src="" alt="default picture" class="clientPic"></div>
-                        <p class="clientFeedback"></p>
-                    </div>
-                    <button id="infoTypeBtn">Client rating</button> -->
                 </div>
             </div>
         </div>
@@ -78,21 +89,55 @@
 <!-- Skills section -->
 
     <div class="skills">
+        <h1>Skills & technologies</h1>
         <div class="skillIcons">
-            <img src="src/assets/SVG/icons8-html.svg" alt="" id="techIcon" onclick="changeTechStyle('html')">
-            <img src="src/assets/SVG/icons8-css3.svg" alt="" id="techIcon" onclick="changeTechStyle('css')">
-            <img src="src/assets/SVG/icons8-javascript.svg" alt="" id="techIcon" onclick="changeTechStyle('js')">
-            <img src="src/assets/SVG/icons8-vue-js.svg" alt="" id="techIcon" onclick="changeTechStyle('vue')">
-            <img src="src/assets/SVG/new-php-logo.svg" alt="php" id="techIcon" onclick="changeTechStyle('php')">
-            <img src="src/assets/SVG/icons8-sql-60.png" alt="" id="techIcon" onclick="changeTechStyle('sql')">
-            <img src="src/assets/SVG/image 8.svg" id="techIcon" onclick="changeTechStyle('tlw')">
-        </div>
-        <div class="skillInfo">
-            <h3 class="skillTitle"></h3>
-            <p class="skillDesc"></p>
-            <div class="exp">
-                <p>Personal experience with technology:</p>
-                <div class="expMeterContainer"><div class="expMeter"></div></div><span class="expPercent"></span>
+            <div class="displayContainer">
+                <div class="imgDisplay">
+                    <img src="src/assets/SVG/icons8-html.svg" alt="" id="techIcon" onclick="changeTechStyle('html')">
+                </div>
+                <p class="skillTitle">HTML5</p>
+            </div>
+
+            <div class="displayContainer">
+                <div class="imgDisplay">
+                    <img src="src/assets/SVG/icons8-css3.svg" alt="" id="techIcon" onclick="changeTechStyle('css')">
+                </div>
+                <p class="skillTitle">CSS3</p>
+            </div>
+
+            <div class="displayContainer">
+                <div class="imgDisplay">
+                    <img src="src/assets/SVG/icons8-javascript.svg" alt="" id="techIcon" onclick="changeTechStyle('js')">
+                </div> 
+                <p class="skillTitle">Javascript</p>
+            </div>
+
+            <div class="displayContainer">
+                <div class="imgDisplay">
+                    <img src="src/assets/SVG/icons8-vue-js.svg" alt="" id="techIcon" onclick="changeTechStyle('vue')">
+                </div>
+                <p class="skillTitle">Vue js</p>
+            </div>
+
+            <div class="displayContainer">
+                <div class="imgDisplay">
+                    <img src="src/assets/SVG/new-php-logo.svg" alt="php" id="techIcon" onclick="changeTechStyle('php')">
+                </div>
+                <p class="skillTitle">PHP</p>
+            </div>
+            
+            <div class="displayContainer">
+                <div class="imgDisplay">
+                    <img src="src/assets/SVG/icons8-sql-60.png" alt="" id="techIcon" onclick="changeTechStyle('sql')">
+                </div>
+                <p class="skillTitle">SQL</p>
+            </div>
+            
+            <div class="displayContainer">
+                <div class="imgDisplay">
+                    <img src="src/assets/SVG/image 8.svg" id="techIcon" onclick="changeTechStyle('tlw')">
+                </div>
+                <p class="skillTitle">Tailwind CSS</p>
             </div>
         </div>
     </div>
@@ -100,7 +145,6 @@
 <!-- Footer section -->
 
     <footer class="footer">
-        
         <div class="contactInfo">
             <h2>Lets have a chat about your next online endeavour @</h2>
             <div class="info">
